@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>首注音猜歌遊戲</title>
+    <style>
+        body { font-family: "微軟正黑體", sans-serif; padding: 20px; line-height: 1.6; }
+        .question { margin-bottom: 20px; }
+        .result { margin-top: 30px; font-weight: bold; font-size: 1.2em; }
+        input[type="text"] { width: 300px; padding: 5px; margin-top: 5px; }
+        button { padding: 10px 20px; font-size: 1em; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+<h2>🎵 首注音猜歌測驗 🎵</h2>
+  <div class="note">
+    <p><strong>｜遊戲規則｜</strong></p>
+    <ul>
+      <li>本遊戲共 9 題，根據提示的注音文字，輸入此句歌詞所對應到的歌名。</li>
+      <li><strong>只需輸入中文，不需標點符號、英文或空格</strong>。</li>
+      <li>猜對一題得一分，若猜不出可留空。</li>
+      <li>完成後，系統會根據你的得分給出回饋！</li>
+    </ul>
+    <p><strong>｜示範題｜</strong></p>
+    <p>提示：ㄆㄈ ㄐㄎ ㄎㄌ ㄨㄨㄍㄔ ㄕㄍㄐㄍ</p>
+    <p>正解：第42屆政大金旋獎主題曲《平凡健康快樂 Ordinary, healthy and happy》中的歌詞「平凡 健康 快樂／往往過程 勝過結果」</p>
+    <p>答案只需輸入：<strong><span style="color: red;">平凡健康快樂</span></strong>即可</p>
+  </div>
+<form id="quizForm">
+    <div class="question">1. 光：ㄧㄧㄕ光 ㄋㄕㄐ ㄕㄕㄇㄊㄉㄘㄧ<br>
+        <input type="text" name="q1">
+    </div>
+    <div class="question">2. 照：ㄨㄈㄓㄋㄒㄐ照ㄆ ㄕㄌㄨㄓㄌㄅㄍㄐㄉㄐㄅ<br>
+        <input type="text" name="q2">
+    </div>
+    <div class="question">3. 亮：ㄧㄎㄓㄗ亮ㄉㄒ ㄋㄈㄊㄑ<br>
+        <input type="text" name="q3">
+    </div>
+    <div class="question">4. 你：你ㄓㄉ ㄐㄙㄉㄩㄖㄓㄗㄔㄕㄉㄉ<br>
+        <input type="text" name="q4">
+    </div>
+    <div class="question">5. 的：ㄎㄅㄨ的ㄅㄕㄉㄉㄗ<br>
+        <input type="text" name="q5">
+    </div>
+    <div class="question">6. 音：ㄦㄨㄊㄐㄒㄩㄉㄕ音，ㄒㄑㄋㄩㄔㄩㄕㄞㄑ<br>
+        <input type="text" name="q6">
+    </div>
+    <div class="question">7. 樂：ㄓㄕㄏㄧㄉㄧ樂ㄏㄏㄒㄓㄓ ㄧㄗㄇㄊㄋ<br>
+        <input type="text" name="q7">
+    </div>
+    <div class="question">8. 夢：ㄨㄓㄉ　ㄨㄉㄨㄌㄅㄕ夢<br>
+        <input type="text" name="q8">
+    </div>
+    <div class="question">9. 想：ㄕ 想ㄧㄓㄉㄨ<br>
+        <input type="text" name="q9">
+    </div>
+    <button type="button" onclick="calculateScore()">提交答案</button>
+</form>
+
+<div id="result" class="result"></div>
+
+<script>
+function calculateScore() {
+    const answers = {
+        q1: "逆光",
+        q2: "重感情的廢物",
+        q3: "夜空中最亮的星",
+        q4: "小情歌",
+        q5: "安九",
+        q6: "聽見下雨的聲音",
+        q7: "說好幸福呢",
+        q8: "我的未來不是夢",
+        q9: "誰"
+    };
+
+    let score = 0;
+    const form = document.getElementById("quizForm");
+    for (let key in answers) {
+        const userInput = form.elements[key].value.trim();
+        if (userInput === answers[key]) {
+            score++;
+        }
+    }
+
+    let message = "";
+    if (score <= 2) {
+        message = "猜不透的不只是他的心還有題目😍😔～";
+    } else if (score <= 6) {
+        message = "瞎猜微懂，多多加油！";
+    } else {
+        message = "懂哥出手了！！";
+    }
+
+    document.getElementById("result").innerHTML = `你的得分是：${score} / 9<br>${message}`;
+}
+</script>
+
+</body>
+</html>
